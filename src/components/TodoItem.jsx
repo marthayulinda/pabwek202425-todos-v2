@@ -2,10 +2,9 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { postedAt } from "../utils/tools";
 import { FaClock, FaTrash } from "react-icons/fa6";
-import { FaEdit } from "react-icons/fa6";
+import { FaEdit } from "react-icons/fa";
 
 function TodoItem({ todo, onDeleteTodo }) {
-  
   let badgeStatus, badgeLabel;
   if (todo.is_finished) {
     badgeStatus = "badge bg-success text-white ms-3";
@@ -29,8 +28,7 @@ function TodoItem({ todo, onDeleteTodo }) {
             </div>
           </div>
           <div className="col-4 text-end">
-
-          <Link
+            <Link
               className="btn btn-warning btn-sm text-dark me-2"
               to={`/todos/${todo.id}/edit`}
             >
