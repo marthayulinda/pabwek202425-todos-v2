@@ -6,7 +6,7 @@ const api = (() => {
       ...options,
       headers: {
         ...options.headers,
-        Authorization: Bearer`${getAccessToken()}`,
+        Authorization: `Bearer ${getAccessToken()}`,
       },
     });
   }
