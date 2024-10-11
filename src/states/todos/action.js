@@ -7,6 +7,7 @@ const ActionType = {
   ADD_TODO: "ADD_TODO",
   DELETE_TODO: "DELETE_TODO",
   DETAIL_TODO: "DETAIL_TODO",
+  UPDATE_TODO: "UPDATE_TODO",
 };
 
 function getTodosActionCreator(todos) {
@@ -97,6 +98,30 @@ function asyncDetailTodo(id) {
   };
 }
 
+// Tambahkan action creator untuk update todo
+function updateTodoActionCreator(status) {
+  return {
+    type: ActionType.UPDATE_TODO,
+    payload: {
+      status,
+    },
+  };
+}
+
+// Tambahkan async action untuk mengedit todo
+function asyncUpdateTodo({ id, title, description, is_finished }) {
+  return async (dispatch) => {
+    dispatch(showLoading());
+    try {
+      await api.putUpdateTodo({ id, title, description, is_finished });
+      dispatch(updateTodoActionCreator(true));
+    } catch (error) {
+      showErrorDialog(error.message);
+    }
+    dispatch(hideLoading());
+  };
+}
+
 export {
   ActionType,
   getTodosActionCreator,
@@ -107,4 +132,5 @@ export {
   asyncDeleteTodo,
   detailTodoActionCreator,
   asyncDetailTodo,
+  asyncUpdateTodo, // Tambahkan ini
 };
