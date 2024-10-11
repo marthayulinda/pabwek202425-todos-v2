@@ -1,10 +1,11 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../utils/api";
 import { showErrorDialog } from "../utils/tools";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
-//TodoUpdatePage
+
 function TodoUpdatePage() {
   const { id } = useParams();
   const [todo, setTodo] = useState({ title: "", description: "" });
@@ -31,7 +32,7 @@ function TodoUpdatePage() {
     e.preventDefault();
     dispatch(showLoading());
     try {
-      await api.putUpdateTodo({ id, ...todo }); // Menggunakan `putUpdateTodo` yang benar
+      await api.putUpdateTodo({ id, ...todo }); // Menggunakan putUpdateTodo yang benar
       navigate(`/todos/${id}`); // Redirect ke halaman detail todo
     } catch (error) {
       showErrorDialog(error.message);

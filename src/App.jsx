@@ -12,6 +12,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ProfilePage from "./pages/ProfilePage";
 import TodoAddPage from "./pages/TodoAddPage";
 import TodoDetailPage from "./pages/TodoDetailPage";
+import TodoUpdatePage from "./pages/TodoUpdatePage";
 
 function App() {
   const { authLogin = null, isPreload = false } = useSelector(
@@ -43,10 +44,7 @@ function App() {
             </div>
             <ul className="nav nav-pills mb-3">
               <li className="nav-item w-50 text-center">
-                <Link
-                  className={`nav-link ${activeLogin} btl`}
-                  to="/"
-                >
+                <Link className={`nav-link ${activeLogin} btl`} to="/">
                   Login
                 </Link>
               </li>
@@ -82,6 +80,7 @@ function App() {
             <Route path="/users/me" element={<ProfilePage />} />
             <Route path="/todos/:id" element={<TodoDetailPage />} />
             <Route path="/todos/add" element={<TodoAddPage />} />
+            <Route path="/todos/:id/edit" element={<TodoUpdatePage />} />
           </Routes>
         </main>
       </div>
