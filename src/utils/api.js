@@ -6,7 +6,7 @@ const api = (() => {
       ...options,
       headers: {
         ...options.headers,
-        Authorization: `Bearer ${getAccessToken()}`,
+        Authorization: Bearer`${getAccessToken()}`,
       },
     });
   }
@@ -173,11 +173,7 @@ const api = (() => {
       throw new Error(message);
     }
 
-    const {
-      data: { todo_id },
-    } = responseJson;
-
-    return todo_id;
+    return message;
   }
 
   async function deleteTodo(id) {
@@ -235,6 +231,20 @@ const api = (() => {
     return todo;
   }
 
+  async function updateTodo(id, { title, description }) {
+    const response = await fetch(`/api/todos/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, description }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to update todo");
+    }
+    return response.json();
+  }
+
   return {
     putAccessToken,
     getAccessToken,
@@ -248,6 +258,7 @@ const api = (() => {
     deleteTodo,
     getAllTodos,
     getDetailTodo,
+    updateTodo,
   };
 })();
 
